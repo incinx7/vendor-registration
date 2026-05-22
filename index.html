@@ -2023,5 +2023,30 @@ document.getElementById('submitBtn').addEventListener('click', function() { doSu
 setType('gst');
 initCheckbox();
 </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const { createClient } = supabase
+  const db = createClient(
+    'https://fgrsllqmkpjqyvknzizp.supabase.co',
+    'sb_publishable_69Q9JFg-b72HErGOJ4Sk8A_HYt5RV3O'
+  )
+
+  document.querySelector('form').addEventListener('submit', async function(e) {
+    e.preventDefault()
+    const formData = new FormData(this)
+    const { error } = await db.from('vendors').insert([{
+      name:    formData.get('name'),
+      email:   formData.get('email'),
+      phone:   formData.get('phone'),
+      company: formData.get('company'),
+      status:  'pending'
+    }])
+    if (error) {
+      alert('Error: ' + error.message)
+    } else {
+      alert('Vendor registered successfully!')
+    }
+  })
+</script>
 </body>
 </html>
