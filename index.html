@@ -928,7 +928,7 @@ async function doSubmit() {
     };
 
     // 2) Insert the submission row.
-    var insert = await sb.from('vendors').insert([{ data: vendorData }]);
+    var insert = await sb.from('vendor_submissions').insert([{ data: vendorData }]);
     if (insert.error) throw new Error(insert.error.message);
 
     hasSubmitted = true; // from here on, doSubmit() is permanently a no-op for this page load
